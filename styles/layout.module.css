@@ -1,0 +1,64 @@
+.NavBar {
+  display: block;
+  height: 60px;
+  background-color: var(--surface-a);
+  margin-bottom: 5px;
+}
+.Menu {
+  padding: 20px;
+  color: var(--text-color);
+}
+.Link {
+  color: var(--text-color);
+}
+.ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.li {
+  float: left;
+}
+.liright {
+  float: right;
+}
+.NavBarFlex {
+  padding: 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: var(--surface-a);
+}
+.NavBarFlex1 {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.NavBarFlex2 {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: var(--surface-a);
+}
+.footerItems {
+  padding: 10px;
+  margin: 10px;
+}
+.VirtualScroller {
+  width: 20vw;
+  height: 86vh;
+}
+.items {
+  display: flex;
+  flex-direction: row;
+}
