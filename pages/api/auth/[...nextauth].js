@@ -31,28 +31,12 @@ export default NextAuth({
     jwt: true,
   },
   callbacks: {
-    jwt: async (token, user, account, profile, isNewUser) => {
-      console.log("here");
-      console.log(token);
-      console.log(user);
-      const isSignIn = user ? true : false;
-      // Add auth_time to token on signin in
-      if (isSignIn) {
-        token.auth_time = Math.floor(Date.now() / 1000);
-      }
-      return Promise.resolve(token);
+    async jwt({ token, user, account, profile, isNewUser }) {
+      return token;
     },
-    session: async (session, token) => {
-      console.log("here2");
-      console.log(token);
-      console.log(session);
-      if (!session?.user || !token?.account) {
-        return session;
-      }
-
-      session.user.id = token.account.id;
-      session.accessToken = token.account.accessToken;
-
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token from a provider.
+      session.accessToken = token.accessToken;
       return session;
     },
   },
