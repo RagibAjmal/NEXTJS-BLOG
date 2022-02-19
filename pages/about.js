@@ -8,7 +8,7 @@ export default function About() {
   useEffect(() => {
     axios
       .get("http://localhost:8000/milk/sample/", {
-        headers: { Authorization: `Bearer ${session.jwt}` },
+        headers: { Authorization: `Bearer ${session.accessToken}` },
       })
       .then((res) => {
         setabout(res.data);
