@@ -30,4 +30,30 @@ export default NextAuth({
   session: {
     jwt: true,
   },
+  callbacks: {
+    jwt: async (token, user, account, profile, isNewUser) => {
+      console.log("here");
+      console.log(token);
+      console.log(user);
+      const isSignIn = user ? true : false;
+      // Add auth_time to token on signin in
+      if (isSignIn) {
+        token.auth_time = Math.floor(Date.now() / 1000);
+      }
+      return Promise.resolve(token);
+    },
+    session: async (session, token) => {
+      console.log("here2");
+      console.log(token);
+      console.log(session);
+      if (!session?.user || !token?.account) {
+        return session;
+      }
+
+      session.user.id = token.account.id;
+      session.accessToken = token.account.accessToken;
+
+      return session;
+    },
+  },
 });
