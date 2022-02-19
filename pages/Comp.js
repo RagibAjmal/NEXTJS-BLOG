@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default function Comp() {
   const { data: session } = useSession();
+  console.log(session);
 
   if (session) {
     console.log(session);
