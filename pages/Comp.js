@@ -10,7 +10,7 @@ export default function Comp() {
     console.log(session);
     return (
       <>
-        Signed in as {session.user.email} <br />
+        Signed in as <br />
         <button onClick={() => signOut()}>Sign out</button>
       </>
     );
