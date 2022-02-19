@@ -13,7 +13,8 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const url = "http://localhost:8000/api/token-auth/";
+        const url =
+          "https://infinite-eyrie-81096.herokuapp.com/api/token-auth/";
         const res = await axios.post(url, credentials);
         console.log(res);
         if (res) {
