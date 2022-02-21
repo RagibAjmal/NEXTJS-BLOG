@@ -1,13 +1,12 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getSession } from "next-auth/react";
 
 export default function Comp() {
   const { data: session } = useSession();
-  console.log(session);
 
   if (session) {
-    console.log(session);
     return (
       <>
         Signed in as <br />
