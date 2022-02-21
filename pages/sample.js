@@ -10,7 +10,7 @@ export default function sample() {
   useEffect(() => {
     if (session) {
       axios
-        .get(`http://localhost:8000/milk/sample`, {
+        .get(`https://infinite-eyrie-81096.herokuapp.com/milk/sample`, {
           headers: {
             Authorization: `Bearer ${session.token}`,
           },
