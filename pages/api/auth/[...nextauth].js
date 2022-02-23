@@ -60,7 +60,7 @@ export default NextAuth({
   callbacks: {
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.token = token.access;
+      session.accessToken = token.accessToken;
       return session;
     },
     async jwt({ token, user, account }) {
@@ -71,7 +71,6 @@ export default NextAuth({
           refreshToken: user.refresh,
         };
       }
-      console.log(token);
       if (Date.now() < token.accessTokenExpires) {
         return token;
       }

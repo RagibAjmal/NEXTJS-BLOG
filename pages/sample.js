@@ -12,7 +12,7 @@ export default function sample() {
       axios
         .get(`https://infinite-eyrie-81096.herokuapp.com/milk/sample`, {
           headers: {
-            Authorization: `Bearer ${session.token}`,
+            Authorization: `Bearer ${session.accessToken}`,
           },
         })
         .then((res) => {
