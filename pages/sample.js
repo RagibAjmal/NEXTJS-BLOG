@@ -1,25 +1,46 @@
-import axios from "axios";
-import { getToken } from "next-auth/jwt";
-import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Button } from "primereact/button";
+import { cartActions } from "../Components/cart";
+import { getSession } from "next-auth/react";
 
 export default function sample() {
-  const { data: session } = useSession();
-  const [month, setMonth] = useState(null);
+  const cart = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  console.log();
+  return (
+    <div>
+      {cart}
+      <Button
+        style={{ padding: "10px", margin: "10px" }}
+        onClick={() => {
+          dispatch(cartActions.add());
+        }}
+      >
+        INCREMENT COUNTER 1
+      </Button>
+      <Button
+        style={{ padding: "10px", margin: "10px" }}
+        onClick={() => {
+          dispatch({ type: "INC2" });
+        }}
+      >
+        INCREMENT COUNTER 2
+      </Button>
+    </div>
+  );
+}
+export async function getServerSideProps({ req, res }) {
+  const session = await getSession({ req });
 
-  useEffect(() => {
-    if (session) {
-      axios
-        .get(`https://infinite-eyrie-81096.herokuapp.com/milk/sample`, {
-          headers: {
-            Authorization: `Bearer ${session.accessToken}`,
-          },
-        })
-        .then((res) => {
-          setMonth(res.data);
-        });
-    }
-  }, [session]);
-
-  return <div>{month && month.toString()}</div>;
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 }

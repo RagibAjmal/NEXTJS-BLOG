@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
 
 async function refreshAccessToken(token) {
@@ -32,6 +33,10 @@ async function refreshAccessToken(token) {
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -42,7 +47,6 @@ export default NextAuth({
         const url =
           "https://infinite-eyrie-81096.herokuapp.com/api/token-auth/";
         const res = await axios.post(url, credentials);
-        console.log(res);
         if (res) {
           return res.data;
         } else {
@@ -58,6 +62,9 @@ export default NextAuth({
     secret: process.env.NEXTAUTH_SECRET,
   },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl + "/sample";
+    },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken;

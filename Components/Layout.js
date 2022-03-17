@@ -4,8 +4,11 @@ import Head from "next/head";
 import styles from "../styles/layout.module.css";
 import { classNames } from "primereact/utils";
 import { VirtualScroller } from "primereact/virtualscroller";
+import { useRouter } from "next/router";
 
 export default function Layout(pageProps) {
+  const router = useRouter();
+  const route = router.pathname;
   const [activeItem, setActiveItem] = useState("Home");
   const basicItems = Array.from({ length: 1000 }).map((_, i) => `Item #${i}`);
   const basicItemTemplate = (item, options) => {
@@ -36,60 +39,64 @@ export default function Layout(pageProps) {
     );
   };
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Test</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className={styles.Layout}>
-        <div className={styles.NavBar}>
-          <ul className={styles.ul}>
-            <li className={styles.li}>
-              <div
-                className={styles.Menu}
-                style={
-                  activeItem == "Home"
-                    ? { backgroundColor: "var(--surface-ground)" }
-                    : { backgroundColor: "var(--surface-a)" }
-                }
-              >
-                <button onClick={() => setActiveItem("Home")}>
-                  <Link href="/">Home</Link>
-                </button>
-              </div>
-            </li>
-            <li className={styles.li}>
-              <div
-                className={styles.Menu}
-                style={
-                  activeItem == "PrimeReact"
-                    ? { backgroundColor: "var(--surface-ground)" }
-                    : { backgroundColor: "var(--surface-a)" }
-                }
-              >
-                <button onClick={() => setActiveItem("PrimeReact")}>
-                  <Link href="/primereact">Prime React</Link>
-                </button>
-              </div>
-            </li>
-            <li className={styles.liright}>
-              <div
-                className={styles.Menu}
-                style={
-                  activeItem == "About"
-                    ? { backgroundColor: "var(--surface-ground)" }
-                    : { backgroundColor: "var(--surface-a)" }
-                }
-              >
-                <button onClick={() => setActiveItem("About")}>
-                  <Link href="/about">About </Link>
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
+    <>
+      {route === "/" ? (
+        <div>{pageProps.children}</div>
+      ) : (
+        <div className={styles.container}>
+          <Head>
+            <title>Test</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <div className={styles.Layout}>
+            <div className={styles.NavBar}>
+              <ul className={styles.ul}>
+                <li className={styles.li}>
+                  <div
+                    className={styles.Menu}
+                    style={
+                      activeItem == "Home"
+                        ? { backgroundColor: "var(--surface-ground)" }
+                        : { backgroundColor: "var(--surface-a)" }
+                    }
+                  >
+                    <button onClick={() => setActiveItem("Home")}>
+                      <Link href="/">Home</Link>
+                    </button>
+                  </div>
+                </li>
+                <li className={styles.li}>
+                  <div
+                    className={styles.Menu}
+                    style={
+                      activeItem == "PrimeReact"
+                        ? { backgroundColor: "var(--surface-ground)" }
+                        : { backgroundColor: "var(--surface-a)" }
+                    }
+                  >
+                    <button onClick={() => setActiveItem("PrimeReact")}>
+                      <Link href="/primereact">Prime React</Link>
+                    </button>
+                  </div>
+                </li>
+                <li className={styles.liright}>
+                  <div
+                    className={styles.Menu}
+                    style={
+                      activeItem == "About"
+                        ? { backgroundColor: "var(--surface-ground)" }
+                        : { backgroundColor: "var(--surface-a)" }
+                    }
+                  >
+                    <button onClick={() => setActiveItem("About")}>
+                      <Link href="/about">About </Link>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
 
-        {/* <div className={styles.NavBarFlex}>
+            {/* <div className={styles.NavBarFlex}>
           <div className={styles.NavBarFlex1}>
             <div className={styles.Menu}>
               <Link href="/">Home</Link>
@@ -104,25 +111,27 @@ export default function Layout(pageProps) {
             </div>
           </div>
   </div>*/}
-      </div>
-      <div className={styles.items}>
-        <VirtualScroller
-          className={styles.VirtualScroller}
-          items={basicItems}
-          itemSize={50}
-          itemTemplate={basicItemTemplate}
-        />
-        {pageProps.children}
-      </div>
-
-      <footer>
-        <div className={styles.footer}>
-          <div className={styles.footerItems}>
-            <i className="pi pi-github"> </i>
-            <span>Github</span>
           </div>
+          <div className={styles.items}>
+            <VirtualScroller
+              className={styles.VirtualScroller}
+              items={basicItems}
+              itemSize={50}
+              itemTemplate={basicItemTemplate}
+            />
+            {pageProps.children}
+          </div>
+
+          <footer>
+            <div className={styles.footer}>
+              <div className={styles.footerItems}>
+                <i className="pi pi-github"> </i>
+                <span>Github</span>
+              </div>
+            </div>
+          </footer>
         </div>
-      </footer>
-    </div>
+      )}
+    </>
   );
 }
