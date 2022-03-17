@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function sample(session) {
   const [month, setMonth] = useState(null);
+  console.log(session);
 
   useEffect(() => {
     if (session) {

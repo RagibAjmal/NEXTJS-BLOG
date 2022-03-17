@@ -1,0 +1,17 @@
+.products {
+  display: grid;
+  column-gap: 50px;
+  row-gap: 50px;
+  grid-template-columns: auto auto auto;
+  padding: 50px;
+}
+.product {
+  background-color: maroon;
+  padding: 20px;
+  height: 100px;
+  width: 100px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
