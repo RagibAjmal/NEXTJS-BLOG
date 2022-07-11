@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "primereact/button";
-import { cartActions } from "../Components/cart";
+import { cartActions } from "../../Components/cart";
 import { getSession } from "next-auth/react";
 
-export default function sample() {
+export default function sample(Token) {
   const cart = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   console.log();
@@ -41,6 +41,6 @@ export async function getServerSideProps({ req, res }) {
     };
   }
   return {
-    props: {},
+    props: { Token: session },
   };
 }

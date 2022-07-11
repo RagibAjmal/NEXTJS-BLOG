@@ -9,6 +9,9 @@ import { useRouter } from "next/router";
 export default function Layout(pageProps) {
   const router = useRouter();
   const route = router.pathname;
+  const regex = new RegExp("/store/*");
+  const path = regex.test(route);
+
   const [activeItem, setActiveItem] = useState("Home");
   const basicItems = Array.from({ length: 1000 }).map((_, i) => `Item #${i}`);
   const basicItemTemplate = (item, options) => {
@@ -40,7 +43,7 @@ export default function Layout(pageProps) {
   };
   return (
     <>
-      {route === "/" ? (
+      {!path ? (
         <div>{pageProps.children}</div>
       ) : (
         <div className={styles.container}>
@@ -57,7 +60,7 @@ export default function Layout(pageProps) {
                     style={
                       activeItem == "Home"
                         ? { backgroundColor: "var(--surface-ground)" }
-                        : { backgroundColor: "var(--surface-a)" }
+                        : { backgroundColor: "var(--primary-color)" }
                     }
                   >
                     <button onClick={() => setActiveItem("Home")}>
@@ -65,17 +68,17 @@ export default function Layout(pageProps) {
                     </button>
                   </div>
                 </li>
-                <li className={styles.li}>
+                <li className={styles.liright}>
                   <div
                     className={styles.Menu}
                     style={
                       activeItem == "PrimeReact"
                         ? { backgroundColor: "var(--surface-ground)" }
-                        : { backgroundColor: "var(--surface-a)" }
+                        : { backgroundColor: "var(--primary-color)" }
                     }
                   >
                     <button onClick={() => setActiveItem("PrimeReact")}>
-                      <Link href="/primereact">Prime React</Link>
+                      <Link href="/cart">Cart</Link>
                     </button>
                   </div>
                 </li>
@@ -85,11 +88,11 @@ export default function Layout(pageProps) {
                     style={
                       activeItem == "About"
                         ? { backgroundColor: "var(--surface-ground)" }
-                        : { backgroundColor: "var(--surface-a)" }
+                        : { backgroundColor: "var(--primary-color)" }
                     }
                   >
                     <button onClick={() => setActiveItem("About")}>
-                      <Link href="/about">About </Link>
+                      <Link href="/milk">Milk</Link>
                     </button>
                   </div>
                 </li>

@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import { useEffect } from "react";
-import styles from "../styles/home.module.css";
+import styles from "../../styles/home.module.css";
 
 export default function Home(pageProps) {
   const products = [

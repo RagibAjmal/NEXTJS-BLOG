@@ -2,6 +2,7 @@ import axios from "axios";
 import { getToken } from "next-auth/jwt";
 import { useSession, getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
+import { Calendar } from "primereact/calendar";
 
 export default function sample(session) {
   const [month, setMonth] = useState(null);
@@ -21,7 +22,14 @@ export default function sample(session) {
     }
   }, [session]);
 
-  return <div>{month && month.toString()}</div>;
+  return (
+    <div>
+      {month && month.toString()}
+      <div>
+        <Calendar inline></Calendar>
+      </div>
+    </div>
+  );
 }
 
 export async function getServerSideProps({ req, res }) {

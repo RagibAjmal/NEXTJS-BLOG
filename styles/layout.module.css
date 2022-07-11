@@ -1,7 +1,11 @@
+.container {
+  margin: 0;
+  padding: 0;
+}
 .NavBar {
   display: block;
   height: 60px;
-  background-color: var(--surface-a);
+  background-color: var(--primary-color);
   margin-bottom: 5px;
 }
 .Menu {
@@ -48,7 +52,7 @@
   justify-content: center;
   align-items: center;
   height: 60px;
-  background-color: var(--surface-a);
+  background-color: var(--primary-color);
 }
 .footerItems {
   padding: 10px;
