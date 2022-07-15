@@ -38,36 +38,38 @@ export default function signUp() {
     } else {
       setLoading(true);
 
-      axios.post(`http://localhost:8000/auth/signup/`, inputs).then((res) => {
-        setLoading(false);
-        if (res.data === "ok") {
-          toast.success(
-            "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.",
-            {
+      axios
+        .post(process.env.BACKEND_URL + "auth/signup/", inputs)
+        .then((res) => {
+          setLoading(false);
+          if (res.data === "ok") {
+            toast.success(
+              "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.",
+              {
+                position: "top-center",
+                autoClose: 10000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                onClose: () => {
+                  Router.push("/");
+                },
+              }
+            );
+          } else {
+            toast.error(res.data, {
               position: "top-center",
-              autoClose: 10000,
+              autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              onClose: () => {
-                Router.push("/");
-              },
-            }
-          );
-        } else {
-          toast.error(res.data, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      });
+            });
+          }
+        });
     }
   };
 

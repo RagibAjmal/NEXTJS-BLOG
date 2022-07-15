@@ -40,7 +40,11 @@ export default function emailAuth() {
       setLoading(true);
 
       const url =
-        `http://localhost:8000/auth/resetPassword/` + route[0] + "/" + route[1];
+        process.env.BACKEND_URL +
+        "auth/resetPassword/" +
+        route[0] +
+        "/" +
+        route[1];
 
       axios
         .post(url, inputs)

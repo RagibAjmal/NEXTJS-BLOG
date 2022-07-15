@@ -11,7 +11,7 @@ export default function emailAuth() {
 
   if (route) {
     const url =
-      `http://localhost:8000/auth/activate/` + route[0] + "/" + route[1];
+      process.env.BACKEND_URL + "auth/activate/" + route[0] + "/" + route[1];
     axios
       .get(url)
       .then((res) => {

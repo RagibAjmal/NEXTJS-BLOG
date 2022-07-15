@@ -21,7 +21,7 @@ export default function Signin() {
     setLoading(true);
 
     axios
-      .post(`http://localhost:8000/auth/forgotPassword/`, inputs)
+      .post(process.env.BACKEND_URL + "auth/forgotPassword/", inputs)
       .then((res) => {
         setLoading(false);
         toast.success(res.data, {

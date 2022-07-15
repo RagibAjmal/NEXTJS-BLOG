@@ -6,10 +6,9 @@ import axios from "axios";
 
 async function refreshAccessToken(token) {
   try {
-    const url = "http://localhost:8000/api/token-ref-auth/";
+    const url = process.env.BACKEND_URL + "api/token-ref-auth/";
     const refreshToken = { refresh: token.refreshToken };
     const response = await axios.post(url, refreshToken);
-    console.log("Hai");
 
     const refreshedTokens = response.data;
 
@@ -48,11 +47,11 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const url = "http://localhost:8000/api/token-auth/";
+        const url = process.env.BACKEND_URL + "api/token-auth/";
         const res = await axios.post(url, credentials);
         if (res) {
           const userData = await axios.get(
-            "http://localhost:8000/auth/user_details/",
+            process.env.BACKEND_URL + "auth/user_details/",
             {
               headers: {
                 Authorization: `Bearer ${res.data.access}`,
@@ -99,7 +98,7 @@ export default NextAuth({
           try {
             const response = await axios.post(
               // tip: use a seperate .ts file or json file to store such URL endpoints
-              "http://localhost:8000/auth/OAuth/" + account.provider + "/",
+              process.env.BACKEND_URL + "auth/OAuth/" + account.provider + "/",
               {
                 email: user.email,
                 access_token: account.access_token, // note the differences in key and value variable names

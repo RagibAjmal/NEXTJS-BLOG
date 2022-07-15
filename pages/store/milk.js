@@ -11,7 +11,7 @@ export default function sample(session) {
   useEffect(() => {
     if (session) {
       axios
-        .get(`https://infinite-eyrie-81096.herokuapp.com/milk/sample`, {
+        .get(process.env.BACKEND_URL + "milk/sample", {
           headers: {
             Authorization: `Bearer ${session.Token}`,
           },
