@@ -39,7 +39,7 @@ export default function signUp() {
       setLoading(true);
 
       axios
-        .post(process.env.BACKEND_URL + "auth/signup/", inputs)
+        .post(process.env.NEXT_PUBLIC_BACKEND_URL + "auth/signup/", inputs)
         .then((res) => {
           setLoading(false);
           if (res.data === "ok") {
