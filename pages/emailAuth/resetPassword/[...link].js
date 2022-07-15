@@ -40,7 +40,7 @@ export default function emailAuth() {
       setLoading(true);
 
       const url =
-        process.env.BACKEND_URL +
+        process.env.NEXT_PUBLIC_BACKEND_URL +
         "auth/resetPassword/" +
         route[0] +
         "/" +
