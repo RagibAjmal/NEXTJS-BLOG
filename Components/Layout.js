@@ -13,34 +13,7 @@ export default function Layout(pageProps) {
   const path = regex.test(route);
 
   const [activeItem, setActiveItem] = useState("Home");
-  const basicItems = Array.from({ length: 1000 }).map((_, i) => `Item #${i}`);
-  const basicItemTemplate = (item, options) => {
-    const className = classNames("scroll-item p-2", {
-      odd: options.odd,
-    });
-    const style =
-      options.props.orientation === "horizontal"
-        ? {
-            width: "50px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }
-        : {
-            height: "50px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          };
 
-    return (
-      <div className={className} style={style}>
-        {item}
-      </div>
-    );
-  };
   return (
     <>
       {!path ? (
@@ -48,7 +21,7 @@ export default function Layout(pageProps) {
       ) : (
         <div className={styles.container}>
           <Head>
-            <title>Test</title>
+            <title>Aruvadai Organic Store</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <div className={styles.Layout}>
@@ -64,7 +37,7 @@ export default function Layout(pageProps) {
                     }
                   >
                     <button onClick={() => setActiveItem("Home")}>
-                      <Link href="/">Home</Link>
+                      <Link href="/store/sample">Home</Link>
                     </button>
                   </div>
                 </li>
@@ -78,7 +51,7 @@ export default function Layout(pageProps) {
                     }
                   >
                     <button onClick={() => setActiveItem("PrimeReact")}>
-                      <Link href="/cart">Cart</Link>
+                      <Link href="/store/cart">Cart</Link>
                     </button>
                   </div>
                 </li>
@@ -92,39 +65,14 @@ export default function Layout(pageProps) {
                     }
                   >
                     <button onClick={() => setActiveItem("About")}>
-                      <Link href="/milk">Milk</Link>
+                      <Link href="/store/milk">Milk</Link>
                     </button>
                   </div>
                 </li>
               </ul>
             </div>
-
-            {/* <div className={styles.NavBarFlex}>
-          <div className={styles.NavBarFlex1}>
-            <div className={styles.Menu}>
-              <Link href="/">Home</Link>
-            </div>
-            <div className={styles.Menu}>
-              <Link href="/">Home</Link>
-            </div>
           </div>
-          <div className={styles.NavBarFlex2}>
-            <div className={styles.Menu}>
-              <Link href="/">Home</Link>
-            </div>
-          </div>
-  </div>*/}
-          </div>
-          <div className={styles.items}>
-            <VirtualScroller
-              className={styles.VirtualScroller}
-              items={basicItems}
-              itemSize={50}
-              itemTemplate={basicItemTemplate}
-            />
-            {pageProps.children}
-          </div>
-
+          {pageProps.children}
           <footer>
             <div className={styles.footer}>
               <div className={styles.footerItems}>

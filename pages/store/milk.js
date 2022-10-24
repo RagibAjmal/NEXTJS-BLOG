@@ -11,9 +11,9 @@ export default function sample(session) {
   useEffect(() => {
     if (session) {
       axios
-        .get(process.env.BACKEND_URL + "milk/sample", {
+        .get(process.env.NEXT_PUBLIC_BACKEND_URL + "milk/sample/", {
           headers: {
-            Authorization: `Bearer ${session.Token}`,
+            Authorization: `Bearer ${session.Token.accessToken}`,
           },
         })
         .then((res) => {
@@ -24,8 +24,8 @@ export default function sample(session) {
 
   return (
     <div>
-      {month && month.toString()}
       <div>
+        <h4>This feature is under development.</h4>
         <Calendar inline></Calendar>
       </div>
     </div>
@@ -44,6 +44,6 @@ export async function getServerSideProps({ req, res }) {
     };
   }
   return {
-    props: { Token: session.accessToken },
+    props: { Token: session },
   };
 }
