@@ -5,6 +5,7 @@ import styles from "../styles/layout.module.css";
 import { classNames } from "primereact/utils";
 import { VirtualScroller } from "primereact/virtualscroller";
 import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 
 export default function Layout(pageProps) {
   const router = useRouter();
@@ -39,6 +40,14 @@ export default function Layout(pageProps) {
                     <button onClick={() => setActiveItem("Home")}>
                       <Link href="/store/sample">Home</Link>
                     </button>
+                  </div>
+                </li>
+                <li className={styles.liright}>
+                  <div
+                    className={styles.Menu}
+                    style={{ backgroundColor: "var(--primary-color)" }}
+                  >
+                    <button onClick={() => signOut()}>Sign Out</button>
                   </div>
                 </li>
                 <li className={styles.liright}>

@@ -74,12 +74,27 @@ export default function sample(session) {
             <Button
               icon="pi pi-shopping-cart"
               label="Add to Cart"
-              onClick={() => {}}
+              onClick={() => addToCart(data.id)}
             ></Button>
           </div>
         </div>
       </div>
     );
+  };
+  const addToCart = (item) => {
+    if (session) {
+      axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_URL +
+          "items/cart/item_add/" +
+          item +
+          "/",
+        {
+          headers: {
+            Authorization: `Bearer ${session.Token.accessToken}`,
+          },
+        }
+      );
+    }
   };
 
   const renderGridItem = (data) => {
@@ -107,7 +122,7 @@ export default function sample(session) {
             <Button
               icon="pi pi-shopping-cart"
               label="Add to Cart"
-              onClick={() => {}}
+              onClick={() => addToCart(data.id)}
             ></Button>
           </div>
         </div>
